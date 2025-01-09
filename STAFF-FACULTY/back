@@ -1,0 +1,917 @@
+
+<!--SIDEBAR OF THE SYSTEM-->
+<?php
+include "sidebar.php";
+include "assets/dashboard_modal.php";
+include "modal/eligibility-modal.php";
+include "modal/children-modal.php";
+include "modal/work-modal.php";
+include "modal/voluntary-modal.php";
+include "modal/program-modal.php";
+include "modal/references-modal.php";
+include "modal/information-modal.php";
+include "modal/governmentid-modal.php";
+include "assets/profile_query.php";
+
+
+
+
+
+?>
+    
+<!-- Begin Page Content -->
+<div class="container-fluid">
+      <!-- Page Heading -->
+      <br>
+      <h1 class="h3 mb-2 text-gray-800">PERSONAL INFORMATION</h1>
+      <br>
+      <hr>
+<div class="container" id="detail">
+    <div class="row">
+        <div class="col-sm-2">
+        <div class="card mb-2">
+                <img class="card-img-top"src="<?php echo $_SESSION['employee_picture'];?>" alt="Card image cap">
+        <div class="card-body">
+                <h5 class="text-center"><?php echo $_SESSION['employee_id'];?></h5>
+                <p class="text-center">Employee No</p>
+            <hr>
+                <h5 class="text-center"><?php echo $_SESSION['employee_firstname'],$result['employee_middlename'],$result['employee_lastname'] ;?></h5>
+                <p class="text-center">Fullname </p>
+                <h5 class="text-center"><?php echo $_SESSION['employee_position'];?></h5>
+                <p class="text-center">Position</p>
+            <hr>
+                
+        </div>
+    </div>
+</div><div class="col-sm-10"  id="Pall">
+<!-- NAVIGATION TAB LIST-->
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
+        <a class="nav-item nav-link" id="nav-family-tab" data-toggle="tab" href="#nav-family" role="tab" aria-controls="nav-family" aria-selected="false">Family Background</a>
+        <a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="false">Educational Background</a>
+        <a class="nav-item nav-link" id="nav-civil-service-tab" data-toggle="tab" href="#nav-civil-service" role="tab" aria-controls="nav-civil-service" aria-selected="true">Civil Service Eligibility</a>
+        <a class="nav-item nav-link" id="nav-work-tab" data-toggle="tab" href="#nav-work" role="tab" aria-controls="nav-work" aria-selected="false">Work Experience</a>
+        <a class="nav-item nav-link" id="nav-voluntary-tab" data-toggle="tab" href="#nav-voluntary" role="tab" aria-controls="nav-voluntary" aria-selected="false">Voluntary Work</a>
+        <a class="nav-item nav-link" id="nav-learning-tab" data-toggle="tab" href="#nav-learning" role="tab" aria-controls="nav-learning" aria-selected="false">Learning and Development</a>
+        <a class="nav-item nav-link" id="nav-other-tab" data-toggle="tab" href="#nav-other" role="tab" aria-controls="nav-other" aria-selected="true">Other Information</a>
+        <a class="nav-item nav-link" id="nav-references-tab" data-toggle="tab" href="#nav-references" role="tab" aria-controls="nav-references" aria-selected="false">References</a>
+        <a class="nav-item nav-link" id="nav-government-tab" data-toggle="tab" href="#nav-government" role="tab" aria-controls="nav-government" aria-selected="false">Goverment Issued Id</a>
+    </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+<!--PERSONAL INFORMATION NAVIGATION TAB-->
+  <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+  <br>
+    <form method="POST" class="needs-validation" action=""  novalidate >
+                                <label for="validationCustom01"><strong><center> PERSONAL INFORMATION</center></strong></label>
+                                <hr>
+                                <div class="form-row">
+                                <input type="text"  style="display: none;"class="form-control" id="validationCustom01" name="Id" value="<?php echo $_SESSION['Id'];?>">
+                                    
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom01"> SURNAME</label>
+                                        <input type="text" class="form-control" id="validationCustom01"  name="employee_firstname" value="<?php echo $_SESSION['employee_firstname'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <label for="validationCustom02">FIRST NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom02"  name="employee_middlename" value="<?php echo$_SESSION['employee_middlename'];?>" > 
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <label for="validationCustom02">MIDDLE NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom02"  name="employee_lastname" value="<?php echo$_SESSION['employee_lastname'];?>" >
+                                    </div>
+                                    <div class="col-md-2 mb-2">
+                                        <label for="validationCustom02">EXTENSION NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom02"  name="employee_extensionname" value="<?php echo$_SESSION['employee_extensionname'];?>" >
+                                    </div>
+                                 </div>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom03">Date of Birth</label>
+                                        <input type="date" class="form-control" id="validationCustom03"  name="employee_datebirth" value="<?php  echo$_SESSION['employee_datebirth'];?>" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom04">Place of Birth</label>
+                                        
+                                        <input type="text" class="form-control" id="validationCustom04" name="employee_placebirth" value="<?php echo$_SESSION['employee_placebirth'];?>">
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationCustom05">Sex</label>    <select class="form-control"   id="employee_sex" name="employee_sex">
+                                                <option><?php echo$_SESSION['employee_sex'];?></option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                    <label for="exampleFormControlSelect1">Civil Status</label>
+                                            <select class="form-control"  id="employee_civilstatus" name="employee_civilstatus">
+                                                <option><?php echo$_SESSION['employee_civilstatus'];?></option>
+                                                <option>Single</option>
+                                                <option>Married</option>
+                                                <option>Widow/er</option>
+                                                <option>Legally Separated</option>
+                                                <option>Annulled</option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="validationCustom05">Blood Type</label>
+                                           <select class="form-control"  id="Bloodtype" name="employee_bloodtype">
+                                                <option><?php echo$_SESSION['employee_bloodtype'];?></option>
+                                                <option>A</option>
+                                                <option>AB</option>
+                                                <option>AB+</option>
+                                                <option>O</option>
+                                                <option>O+</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-1 mb-3">
+                                        <label for="validationCustom03">Height(m)</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_height" value="<?php  echo$_SESSION['employee_height'];?>" required>
+                                    </div>
+                                    <div class="col-md-1 mb-3">
+                                        <label for="validationCustom04">Weight(kg)</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_weight" value="<?php  echo$_SESSION['employee_weight'];?>" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom05">Citizenship</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_citizenship" value="<?php  echo$_SESSION['employee_citizenship'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">Telephone</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_telephone" value="<?php  echo$_SESSION['employee_telephone'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom03">Contact No.</label>
+                                        <input type="text" class="form-control" id="validationCustom03"  name="employee_contact" value="<?php  echo$_SESSION['employee_contact'];?>">
+                                   </div>
+                                </div>
+                                <hr>
+                                <label for="validationCustom03"><strong>RESIDENTIAL ADDRESS</strong></label>
+                                <hr>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom03">House/Block/Lot No.</label>
+                                        <input type="text" class="form-control" id="validationCustom03" name="employee_Rblock" value="<?php echo$_SESSION['employee_Rblock'];?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom04">Street</label>
+                                        <input type="text" class="form-control" id="validationCustom04"  name="employee_Rstreet" value="<?php echo$_SESSION['employee_Rstreet'];?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom05">Subdivision/Village</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_Rvillage" value="<?php echo$_SESSION['employee_Rvillage'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom03">Barangay</label>
+                                        <input type="text" class="form-control" id="validationCustom03" name="employee_Rbarangay" value="<?php echo$_SESSION['employee_Rbarangay'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom04">City/Municipality</label>
+                                        <input type="text" class="form-control" id="validationCustom04"  name="employee_Rcity" value="<?php echo$_SESSION['employee_Rcity'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">Province</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_Rprovince" value="<?php echo$_SESSION['employee_Rprovince'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">Zipcode</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name=" employee_Rzipcode" value="<?php echo$_SESSION['employee_Rzipcode'];?>">
+                                    </div>
+                                </div>
+                                <hr>
+                                <label for="validationCustom03"><strong>PERMANENT ADDRESS</strong></label>
+                                <hr>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom03">House/Block/Lot No.</label>
+                                        <input type="text" class="form-control" id="validationCustom03" name="employee_Pblock" value="<?php echo$_SESSION['employee_Pblock'];?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom04">Street</label>
+                                        <input type="text" class="form-control" id="validationCustom04"  name="employee_Pstreet" value="<?php echo$_SESSION['employee_Pstreet'];?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom05">Subdivision/Village</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_Pvillage" value="<?php echo$_SESSION['employee_Pvillage'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom03">Barangay</label>
+                                        <input type="text" class="form-control" id="validationCustom03" name="employee_Pbarangay" value="<?php echo$_SESSION['employee_Pbarangay'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom04">City/Municipality</label>
+                                        <input type="text" class="form-control" id="validationCustom04"  name="employee_Pcity" value="<?php echo$_SESSION['employee_Pcity'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">Province</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_Pprovince" value="<?php echo$_SESSION['employee_Pprovince'];?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">Zipcode</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_Pzipcode" value="<?php echo$_SESSION['employee_Pzipcode'];?>">
+                                    </div>
+                                </div>
+                                <a><strong>GOVERMENT ID NO.</strong></a>
+                                <hr>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom04">GSIS NO.</label>
+                                        <input type="text" class="form-control" id="validationCustom04"  name="employee_gsis" value="<?php echo$_SESSION['employee_gsis'];?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom05">PAG-IBIG NO.</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_pagibig" value="<?php echo$_SESSION['employee_pagibig'];?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom03">PHILHEALTH</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_philhealth" value="<?php echo$_SESSION['employee_philhealth'];?>">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom04">SSS</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_sss" value="<?php echo$_SESSION['employee_sss'];?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom05">TIN</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="employee_tin" value="<?php echo$_SESSION['employee_tin'];?>">
+                                    </div>
+                                </div>
+                              
+                                <a class="btn btn btn-primary btn-sm float-right" href="#" data-toggle="modal" data-target="#updateModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                   Update
+                                </a>  
+                                 <!--MODAL FOR CONFIRMATION-->
+                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you Sure to Update Your Personal Information?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div><div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                    <button class="btn btn btn-primary btn-sm float-right  "  type="submit"  id="Update"   name="update"><i class='fas fa-user-edit'></i>Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+  </div>
+
+
+
+
+
+
+<!--FAMILY BACKGROUND NAVIGATION TAB-->
+    <div class="tab-pane fade" id="nav-family" role="tabpanel" aria-labelledby="nav-family-tab">
+        <br>
+        <label for="validationCustom01"><strong><center> FAMILY BACKGROUND</center></strong></label>
+        
+            <table class="table table-hover" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>NAME OF CHILDREN</th>
+                        <th>DATE OF BIRTH </th>
+                        <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#Children">ADD</button>
+                                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    ob_start();
+                    include_once "assets/connection.php";
+                    $conn = dbConnect();
+                    $account = $conn->prepare("SELECT * FROM emp_child INNER JOIN emp_profile WHERE emp_child.employee_id = emp_profile.employee_id AND emp_profile.Id=$_SESSION[Id]");
+                    $account->execute();
+                    while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                     $childd= $result["child_id"];
+                      echo '<tr>
+                                    <td>'.$result["child_name"].'</td>
+                                    <td>'.$result["child_birthdate"].'</td>
+                                    <td> 
+                                    <button type="button" onclick="editChild('.$childd.');" class="btn btn-warning"><span class ="fa fa-edit"></span></button>
+                                    </td>
+                            </tr>';
+                    }
+                    
+                    ob_end_flush();
+                    ?>
+                </tbody>
+            </table>
+      <br>
+      <hr>
+                  
+
+                    <form method="POST" class="needs-validation"  novalidate >
+                                <div class="form-row">
+                                <input type="hidden"  class="form-control" id="validationCustom01" name="fam_id" value="<?php echo$fam_id;?>">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom01">SPOUSE`S SURNAME</label>
+                                        <input type="text" class="form-control" id="validationCustom01"  name="spouse_surname" value="<?php echo$spouse_surname;?>">
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <label for="validationCustom02">FIRST NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom02"  name="spouse_firstname" value="<?php echo$spouse_firstname;?>" > 
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <label for="validationCustom02">MIDDLE NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom02"  name="spouse_middlename" value="<?php echo$spouse_middlename;?>" >
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <label for="validationCustom02">EXTENSION NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom02"  name="spouse_extension" value="<?php echo$spouse_extension;?>" >
+                                    </div>
+                                 </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom03">OCCUPATION</label>
+                                        <input type="text" class="form-control" id="validationCustom03"  name="spouse_occupation" value="<?php echo$spouse_occupation;?>" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom04">EMPLOYEE/BUSINESS NAME</label>
+                                        
+                                        <input type="text" class="form-control" id="validationCustom04" name="spouse_business" value="<?php echo$spouse_business;?>">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="validationCustom05">TELEPHONE NO.</label>
+                                        <input type="text" class="form-control" id="Sextext"  name="spouse_no" value="<?php echo$spouse_no;?>" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                    <label for="exampleFormControlSelect1">FATHER`S SURNAME</label>
+                                         <input type="text" class="form-control" id="Civilstatustext" name="father_surname"  value="<?php echo$father_surname;?>" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">FIRST NAME</label>
+                                        <input type="text" class="form-control" id="Bloodtypetext"  name="father_firstname" value="<?php echo$father_firstname;?>" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom03">MIDDLE NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="father_middlename" value="<?php echo$father_middlename;?>" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom04">EXTENSION NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="father_extensionname" value="<?php echo$father_extensionname;?>" required>
+                                    </div>
+                                </div>
+                                    <hr>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">MOTHER`S MAIDEN NAME</label>
+                                     </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom05">SURNAME</label>
+                                        <input type="text" class="form-control" id="validationCustom05"  name="mother_surname" value="<?php echo$mother_surname;?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="validationCustom03">FIRST NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom03"  name="mother_firstname" value="<?php echo$mother_firstname;?>">
+                                   </div>
+                                   <div class="col-md-3 mb-3">
+                                        <label for="validationCustom03">MIDDLE NAME</label>
+                                        <input type="text" class="form-control" id="validationCustom03"  name="mother_middlename" value="<?php echo$mother_middlename;?>">
+                                </div>
+                            </div>
+                            <hr>    
+                            <a class="btn btn btn-primary btn-sm float-right" href="#" data-toggle="modal" data-target="#familyModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                   Update
+                                </a>  
+                                 <!--MODAL FOR CONFIRMATION FAMILY BACKGROUND-->
+                                <div class="modal fade" id="familyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are you Sure to Update Your Family Background?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div><div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                    <button class="btn btn btn-primary btn-sm float-right  "  type="submit"  id="updatefamily"   name="updatefamily"><i class='fas fa-user-edit'></i>Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    </form>
+                    <?php ?>
+        <hr>
+    </div>
+
+<!--EDUCATION NAVIGATION TAB-->
+    <div class="tab-pane fade" id="nav-education" role="tabpanel" aria-labelledby="nav-education-tab">
+    <br>
+    <label for="validationCustom01"><strong><center>EDUCATIONAL BACKGROUND </center></strong></label>
+       <br>
+       <div class="table-responsive">
+                    <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">LEVEL</th>
+                    <th scope="col">NAME OF SCHOOL</th>
+                    <th scope="col">BASIC EDUCATION/DEGREE/COURSE</th>
+                    <th scope="col">FROM</th>
+                    <th scope="col">TO</th>
+                    <th scope="col">HIGHEST LEVEL/UNIT EARNED</th>
+                    <th scope="col">YEAR GRADUATED</th>
+                    <th scope="col">SCHOLARSHIP /ACADEMIC HONOR RECIEVED</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">ELEMENTARY</th>
+                    <td><?php echo$elem_name?></td>
+                    <td><?php echo$elem_degree?></td>
+                    <td>2003</td>
+                    <td>2009</td>
+                    <td>N/A</td>
+                    <td>2013</td> 
+                    <td>N/A</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">SECONDARY</th>
+                    <td>CABA NATIONAL HIGH SCHOOL</td>
+                    <td>SECONDARY</td>
+                    <td>2009</td>
+                    <td>2013</td>
+                    <td>N/A</td>
+                    <td>2013</td>
+                    <td>N/A</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">VOCATIONAL/TRADE COURSE</th>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    </tr>
+                    <th scope="row">COLLEGE</th>
+                    <td>LORMA COLLEGES</td>
+                    <td>BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY</td>
+                    <td>2013</td>
+                    <td>2020</td>
+                    <td>N/A</td>
+                    <td>2020</td>
+                    <td>DEAN`S LISTER</td>
+                    </tr>
+                </tbody>
+                </table>
+    </div>
+    </div>
+    
+    <!--CIVIL SERVICE ELIGIBILITY NAVIGATION TAB-->
+    <div class="tab-pane fade" id="nav-civil-service" role="tabpanel" aria-labelledby="nav-civil-service-tab">
+         <br>
+        <label for="validationCustom01"><strong><center> CIVIL SERVICE ELIGIBILITY</center></strong></label>
+        <hr>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>NAME OF ELIGIBILITY</th>
+                                    <th>RATING</th>
+                                    <th>DATE OF EXAMINATION</th>
+                                    <th>PLACE OF EXAMINATION</th>
+                                    <th>LICENSE NO</th>
+                                    <th>DATE OF VALIDITY</th>
+                                             
+                                    <th> <button type="button" class="btn btn-success float-right"  data-toggle="modal" data-target="#Eligibility"><span class ="fa fa-plus">ADD</span></button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_eligibility INNER JOIN account WHERE emp_eligibility.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $did= $result["eligibility_id"];
+                                echo '<tr>
+                                                <td>'.$result["eligibility_name"].'</td>
+                                                <td>'.$result["eligibility_rating"].'</td>
+                                                <td>'.$result["eligibility_date"].'</td>
+                                                <td>'.$result["eligibility_place"].'</td>
+                                                <td>'.$result["eligibility_number"].'</td>
+                                                <td>'.$result["eligibility_validity"].'</td>
+                                            
+                                                <td> 
+                                                <button type="button" onclick="editEligibilitye('.$did.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+    
+
+    
+    <!--WORK EXPERCIENCE NAVIGATION TAB-->
+    <div class="tab-pane fade" id="nav-work" role="tabpanel" aria-labelledby="nav-work-tab">
+                <br>
+            <label for="validationCustom01"><strong><center> WORK EXPERIENCE</center></strong></label>
+            <hr>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>FROM</th>
+                                    <th>TO</th>
+                                    <th><center>POSITION TITLE</center></th>
+                                    <th><center>DEPARTMENT/AGENCY/OFFICE/COMPANY
+                                    (Write in full / Do not abbreviate)</center></th>
+                                    <th>MONTHLY SALARY</th>
+                                    <th>SALARY JOB/PAY GRADE</th>
+                                    <th>STATUS OF APPOINTMENT</th>
+                                    <th>GOV`T SERVICE</th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#work">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_work INNER JOIN account WHERE emp_work.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $workk= $result["work_id"];
+                                echo '<tr>
+                                                <td>'.$result["work_from"].'</td>
+                                                <td>'.$result["work_to"].'</td>
+                                                <td><center>'.$result["work_position"].'</center></td>
+                                                <td><center>'.$result["work_department"].'</center></td>
+                                                <td>'.$result["work_salary"].'</td>
+                                                <td>'.$result["work_grade"].'</td>
+                                                <td>'.$result["work_status"].'</td>
+                                                <td>'.$result["work_gov"].'</td>
+                                            
+                                                <td> 
+                                                <button type="button" onclick=" editWorke('.$workk.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+
+    <!--VOLUNTARY WORK NAVIGATION TAB-->
+    <div class="tab-pane fade" id="nav-voluntary" role="tabpanel" aria-labelledby="nav-voluntary-tab">
+            <br>
+            <label for="validationCustom01"><strong>VOLUNTARY WORK OR INVOLVEMENT IN CIVIC /NON-GOVERMENT/PEOPLE/VOLUNTARY ORGANIZATION/S</strong></label>
+            <hr>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>NAME OF ORGANIZATION</th>
+                                    <th>ADDRESS</th>
+                                    <th>FROM</th>
+                                    <th>TO</th>
+                                    <th>NUMBER OF HOURS</th>
+                                    <th>POSITION/ NATURE OF WORK</th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#voluntary">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_voluntary INNER JOIN account WHERE emp_voluntary.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $voluntaryy1= $result["voluntary_id"];
+                                echo '<tr>
+                                                <td>'.$result["voluntary_name"].'</td>
+                                                <td>'.$result["voluntary_address"].'</td>
+                                                <td>'.$result["voluntary_from"].'</td>
+                                                <td>'.$result["voluntary_to"].'</td>
+                                                <td>'.$result["voluntary_hours"].'</td>
+                                                <td>'.$result["voluntary_position"].'</td>
+                                            
+                                                <td> 
+                                                <button type="button" onclick=" editVoluntary('.$voluntaryy1.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+
+    <!--LEARNING AND DEVELOPMENT NAVIGATION TAB-->
+    <div class="tab-pane fade" id="nav-learning" role="tabpanel" aria-labelledby="nav-learning-tab">
+            <br>
+            <label for="validationCustom01"><strong>LEARNING AND DEVELOPMENT(L&D) INTERVENTIONS/TRAINING PROGRAMS ATTENDED</strong></label>
+            <hr>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>FROM</th>
+                                    <th>TO</th>
+                                    <th>NUMBER OF HOURS</th>
+                                    <th>TYPE OF LD
+                                    (Managerial/
+                                    Supervisory/
+                                    Techinical/etc)</th>
+                                    <th>CONDUCTED/SPONSORED BY</th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#attended">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_program_attended INNER JOIN account WHERE emp_program_attended.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $programm= $result["attend_id"];
+                                echo '<tr>
+                                                <td>'.$result["attend_name"].'</td>
+                                                <td>'.$result["attend_from"].'</td>
+                                                <td>'.$result["attend_to"].'</td>
+                                                <td>'.$result["attend_hours"].'</td>
+                                                <td>'.$result["attend_ld"].'</td>
+                                                <td>'.$result["attend_sponsored"].'</td>
+                                            
+                                                <td> 
+                                                <button type="button" onclick=" editProgram('. $programm.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+
+     <!--OTHER INFORMATION NAVIGATION TAB-->
+     <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab">
+            <br>
+            <label for="validationCustom01"><strong>OTHER INFORMATION</strong></label>
+            <hr>
+           
+            <!--OTHER INFORMATION RECOGNITION NAVIGATION TAB-->          
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th><strong>NON-ACADEMIC DISTINCTIONS / RECOGNITION</strong></th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#distinction">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_distinction INNER JOIN account WHERE emp_distinction.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $distinction = $result["distinction_id"];
+                                echo '<tr>
+                                                <td>'.$result["distinction_name"].'</td>
+                                                <td> 
+                                                <button type="button" onclick=" editDistinction('.$distinction.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <!--OTHER INFORMATION ORGANIZATION NAVIGATION TAB--> 
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th><strong>MEMBERSHIP IN ASSOCIATION/ORGANIZATION</strong></th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#organization">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_organization INNER JOIN account WHERE emp_organization.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $organizationn= $result["organization_id"];
+                                echo '<tr>
+                                                <td>'.$result["organization_name"].'</td>
+                                            
+                                                <td> 
+                                                <button type="button" onclick=" editOrganization('.$organizationn.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+             <!--OTHER INFORMATION HOBBIES NAVIGATION TAB-->
+             <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th><strong>MEMBERSHIP IN ASSOCIATION/ORGANIZATION</strong></th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#organization">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_hobbies INNER JOIN account WHERE emp_hobbies.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $hobbiess = $result["hobbies_id"];
+                                echo '<tr>
+                                                <td>'.$result["hobbies_name"].'</td>
+                                            
+                                                <td> 
+                                                <button type="button" onclick=" editHobbies('.$hobbiess.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+    <!--REFERENCES NAVIGATION TAB-->
+    <div class="tab-pane fade" id="nav-references" role="tabpanel" aria-labelledby="nav-references-tab">
+            <br>
+            <label for="validationCustom01"><strong>REFERENCES</strong></label>
+            <hr>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>ADDRESS</th>
+                                    <th>TELEPHONE NO.</th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#references">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_reference INNER JOIN account WHERE emp_reference.employee_id= account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $referencessa = $result["reference_id"];
+                                echo '<tr>
+                                                <td>'.$result["reference_name"].'</td>
+                                                <td>'.$result["reference_address"].'</td>
+                                                <td>'.$result["reference_tel"].'</td>
+                                              
+                                                <td> 
+                                                <button type="button" onclick=" editReferences('.$referencessa.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+
+     <!--GOVERNMENT ISSUED ID NAVIGATION TAB-->
+     <div class="tab-pane fade" id="nav-government" role="tabpanel" aria-labelledby="nav-government-tab">
+            <br>
+            <label for="validationCustom01"><strong>GOVERNMENT ISSUED ID</strong></label>
+            <hr>
+            <div class="card-body">
+                <div class="table-responsive">
+                <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>GOVERNMENT ISSUED ID</th>
+                                    <th>ID/LICENSE/PASSPORT NO.</th>
+                                    <th>DATE</th>
+                                    <th>PLACE OF ISSUANCE</th>
+                                    <th> <button type="button" class="btn btn-success btn-sm float-right"  data-toggle="modal" data-target="#governmentid">ADD</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                ob_start();
+                                include_once "assets/connection.php";
+                                $conn = dbConnect();
+                                $account = $conn->prepare("SELECT * FROM emp_gov_id INNER JOIN account WHERE emp_gov_id.employee_id = account.employee_id AND account.account_id = $_SESSION[account_id] ");
+                                $account->execute();
+                                while($result = $account->fetch(PDO::FETCH_ASSOC)){
+                                $govidd = $result["government_id"];
+                                echo '<tr>
+                                                <td>'.$result["government_name"].'</td>
+                                                <td>'.$result["government_no"].'</td>
+                                                <td>'.$result["government_date"].'</td>
+                                                <td>'.$result["government_place"].'</td>
+                                                <td> 
+                                                <button type="button" onclick="editGovernid('.$govidd.');" class="btn btn-warning"><span class ="fa fa-edit">EDIT</span></button>
+                                                </td>
+                                                
+                                        </tr>';
+                                }
+                                
+                                ob_end_flush();
+                                ?>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+    </div>
+</div>
+
+ <!-- Dashboard js plugins -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/dashboard/children.js"></script>
+    <script src="js/dashboard/distinction.js"></script>
+    <script src="js/dashboard/eligibility.js"></script>
+    <script src="js/dashboard/hobbies.js"></script>
+    <script src="js/dashboard/organization.js"></script>
+    <script src="js/dashboard/program.js"></script>
+    <script src="js/dashboard/reference.js"></script>
+    <script src="js/dashboard/work.js"></script>
+    <script src="js/dashboard/voluntary.js"></script>
+    <script src="js/dashboard/reference.js"></script>
+    <script src="js/dashboard/govid.js"></script>
+    
