@@ -1,25 +1,29 @@
 <?php
-	session_start();
+session_start();
 
-	$user_check = $_SESSION['Id'];
-	
-	include_once "connection.php";
-	$conn = dbConnect();
-	$ses_sql = $conn->prepare("select Id from account where Id = '$user_check' ");
+if (!isset($_SESSION['Id'])) {
+	header("Location: ../../../index.php");
+	exit;
+}
 
-	$row = $ses_sql->fetch(PDO::FETCH_BOTH);
+$user_check = $_SESSION['Id'];
 
-	$login_sessiom =$row['Id'];
+include_once "connection.php";
+$conn = dbConnect();
 
+// Use a prepared statement with parameter binding
+$ses_sql = $conn->prepare("SELECT Id FROM account WHERE Id = :id");
+$ses_sql->bindParam(':id', $user_check, PDO::PARAM_INT);
+$ses_sql->execute();
 
-	if (!isset($_SESSION['Id'])) {
-		// $mysqli->close();
+$row = $ses_sql->fetch(PDO::FETCH_ASSOC);
 
-
-
-		header("location:../../../index.php");
-		# code...
-	}
+if ($row) {
+	$login_session = $row['Id'];
+} else {
+	// No user found → force logout
+	session_destroy();
+	header("Location: ../../../index.php");
+	exit;
+}
 ?>
-
-
